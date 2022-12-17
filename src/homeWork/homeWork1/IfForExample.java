@@ -1,4 +1,4 @@
-package homeWork.homework1;
+package homeWork.homeWork1;
 
 public class IfForExample {
     public static void main(String[] args) {
