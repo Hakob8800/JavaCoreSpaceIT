@@ -1,7 +1,5 @@
 package homeWork.homeWork4;
 
-import java.util.Arrays;
-
 public class ArraySpaceExample {
 
     public static void main(String[] args) {
@@ -23,13 +21,10 @@ public class ArraySpaceExample {
 
         char[] resultChars = new char[lastIndex - firstIndex + 1];
         for (int i = 0; i < resultChars.length; i++) {
-            resultChars[i] = spaceArray[firstIndex];
-            firstIndex++;
+            resultChars[i] = spaceArray[firstIndex++];
+            System.out.print(resultChars[i]);
         }
 
-        for (char resultChar : resultChars) {
-            System.out.print(resultChar);
-        }
     }
 
 }

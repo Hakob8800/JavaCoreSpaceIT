@@ -1,6 +1,5 @@
 package homeWork.homeWork4;
 
-
 public class SortedArray {
 
     public static void main(String[] args) {
@@ -20,7 +19,7 @@ public class SortedArray {
             breakPoint--;
         }
         for (int x : arr) {
-            System.out.print(x + ", ");
+            System.out.print(x + " ");
         }
         System.out.println();
 
@@ -37,7 +36,7 @@ public class SortedArray {
             breakPoint++;
         }
         for (int x : arr) {
-            System.out.print(x + ", ");
+            System.out.print(x + " ");
         }
 
     }
