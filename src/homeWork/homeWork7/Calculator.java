@@ -10,7 +10,7 @@ public class Calculator {
         return a - b;
     }
 
-    double divide(int a, int b) {
+    double divide(double a, double b) {
         if (b == 0) {
             System.out.println("cannot be divided by zero");
             return -1;
