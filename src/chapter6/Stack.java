@@ -2,10 +2,11 @@ package chapter6;
 
 public class Stack {
 
-    int[] stck = new int[10];
-    int tos;
+     private int[] stck;
+     private int tos;
 
-    Stack(){
+    Stack(int size){
+        stck = new int[size];
         tos = -1;
     }
 

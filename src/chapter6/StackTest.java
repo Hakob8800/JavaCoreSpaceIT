@@ -3,7 +3,7 @@ package chapter6;
 public class StackTest {
     public static void main(String[] args) {
 
-        Stack stack1 = new Stack();
+        Stack stack1 = new Stack(10);
 
         for (int i = 0; i < 10; i++) {
             stack1.push((i+3)*2);
