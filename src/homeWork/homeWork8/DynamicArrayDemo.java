@@ -18,6 +18,7 @@ public class DynamicArrayDemo {
         System.out.println(dy.get(13));
         dy.print();
         System.out.println(dy.length());
+        dy.get(99);
 
     }
 

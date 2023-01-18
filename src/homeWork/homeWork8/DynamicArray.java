@@ -14,6 +14,10 @@ public class DynamicArray {
     }
 
     public int get(int index) {
+        if (index > array.length - 1 || index < 0) {
+            System.err.println("Index out of bounds array ");
+            return 0;
+        }
         return array[index];
     }
 
@@ -37,6 +41,10 @@ public class DynamicArray {
     }
 
     public void delete(int index) {
+        if (index > array.length - 1 || index < 0) {
+            System.err.println("Index out of bounds array ");
+            return;
+        }
         for (int i = index; i < array.length; i++) {
             array[index] = array[index + 1];
         }
