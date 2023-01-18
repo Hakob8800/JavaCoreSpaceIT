@@ -8,7 +8,7 @@ public class DynamicArray {
 
     public void add(int item) {
         if (size == array.length) {
-            array = arrayLengthIncrement();
+            extend();
         }
         array[size++] = item;
     }
@@ -24,12 +24,12 @@ public class DynamicArray {
         System.out.println();
     }
 
-    private int[] arrayLengthIncrement() {
+    private void extend() {
         int[] tmp = new int[array.length + 10];
         for (int i = 0; i < array.length; i++) {
             tmp[i] = array[i];
         }
-        return tmp;
+        array = tmp;
     }
 
     int length() {
