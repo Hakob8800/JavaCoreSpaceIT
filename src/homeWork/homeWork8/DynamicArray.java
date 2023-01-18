@@ -35,4 +35,11 @@ public class DynamicArray {
     int length() {
         return size;
     }
+
+    public void delete(int index) {
+        for (int i = index; i < array.length; i++) {
+            array[index] = array[index + 1];
+        }
+        size--;
+    }
 }
