@@ -52,7 +52,7 @@ public class DynamicArray {
     }
 
     public void set(int index, int value) {
-        if (index < 0 || index > size) {
+        if (index < 0 || index > size - 1) {
             System.out.println("There is not index" + index);
             return;
         }
@@ -62,7 +62,7 @@ public class DynamicArray {
 
     public void add(int index, int value) {
         if (index < 0 || index > size) {
-            System.out.println("There is not index" + index);
+            System.out.println("Array only have " + size + " elements\n You can add index from 0 to "+size);
             return;
         }
         if (size == array.length) {
