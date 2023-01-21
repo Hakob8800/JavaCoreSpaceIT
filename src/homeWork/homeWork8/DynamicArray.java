@@ -68,12 +68,13 @@ public class DynamicArray {
         if (size == array.length) {
             extend();
         }
+        size++;
         for (int i = size; i > index; i--) {
             array[i] = array[i - 1];
 
         }
         array[index] = value;
-        size++;
+
     }
 
     public boolean exists(int value) {
