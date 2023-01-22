@@ -11,8 +11,10 @@ public class DynamicArrayDemo {
             dy.add(i + 1);
         }
         System.out.println(dy.length());
-        dy.add(12,1);
+        dy.add(12, 1);
         dy.print();
+        System.out.println(dy.exists(123));
+        System.out.println(dy.exists(10));
 
     }
 

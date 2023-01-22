@@ -62,7 +62,7 @@ public class DynamicArray {
 
     public void add(int index, int value) {
         if (index < 0 || index > size) {
-            System.out.println("Array only have " + size + " elements\n You can add index from 0 to "+size);
+            System.out.println("Array only have " + size + " elements\n You can add index from 0 to " + size);
             return;
         }
         if (size == array.length) {
@@ -78,12 +78,14 @@ public class DynamicArray {
     }
 
     public boolean exists(int value) {
-        for (int i = 0; i < size; i++) {
+        boolean b = false;
+        for (int i = 0; i < size - 1; i++) {
             if (array[i] == value) {
-                return true;
+                b = true;
+                break;
             }
         }
-        return false;
+        return b;
     }
 
     public int getIndexByValue(int value) {
