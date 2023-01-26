@@ -2,29 +2,46 @@ package chapter6;
 
 public class Stack {
 
-     private int[] stck;
-     private int tos;
+    private int[] stck = new int[10];
+    private int tos = -1;
 
-    Stack(int size){
-        stck = new int[size];
-        tos = -1;
+
+    public void push(int item) {
+        if (tos == stck.length - 1) {
+            extend();
+        }
+        stck[++tos] = item;
+
     }
 
-    void push(int item){
-        if(tos==stck.length-1){
-            System.out.println("stack is full");
-        }
-        else {
-            stck[++tos]=item;
-        }
-    }
-    int pop(){
-        if(tos<0){
+    public int pop() {
+        if (tos < 0) {
             System.out.println("stack is empty");
             return 0;
-        }
-        else {
+        } else {
             return stck[tos--];
         }
+    }
+
+    public boolean isEmpty() {
+        return tos < 0;
+    }
+
+    public int get(){
+        if(tos<0){
+            return -1;
+        }
+        else {
+            return stck[tos];
+        }
+
+    }
+
+    private void extend() {
+        int[] tmp = new int[stck.length + 10];
+        for (int i = 0; i < stck.length; i++) {
+            tmp[i] = stck[i];
+        }
+        stck = tmp;
     }
 }

@@ -5,7 +5,6 @@ public class DynamicArray {
     private int[] array = new int[10];
     private int size;
 
-
     public void add(int item) {
         if (size == array.length) {
             extend();
@@ -87,7 +86,7 @@ public class DynamicArray {
         }
         return b;
     }
-
+    
     public int getIndexByValue(int value) {
         for (int i = 0; i < size; i++) {
             if (array[i] == value) {
@@ -96,5 +95,4 @@ public class DynamicArray {
         }
         return -1;
     }
-
 }
