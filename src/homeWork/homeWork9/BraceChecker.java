@@ -25,7 +25,7 @@ public class BraceChecker {
                     System.out.println("Error! There is opened " + (char) stack.pop() + " but closed ), index:" + i);
                     return;
                 } else {
-                    System.out.println("Error! There is  no opened scope! index " + i);
+                    System.out.println("Error! There is  no opened scope but it closed ) index:" + i);
                     return;
                 }
             }
@@ -38,7 +38,7 @@ public class BraceChecker {
                     System.out.println("Error! There is opened " + (char) stack.pop() + " but closed ], index:" + i);
                     return;
                 } else {
-                    System.out.println("Error! There is  no opened scope! index " + i);
+                    System.out.println("Error! There is  no opened scope but it closed ] index:" + i);
                     return;
                 }
             }
@@ -51,11 +51,14 @@ public class BraceChecker {
                     System.out.println("Error! There is opened " + (char) stack.pop() + " but closed }, index:" + i);
                     return;
                 } else {
-                    System.out.println("Error! There is  no opened scope! index " + i);
+                    System.out.println("Error! There is  no opened scope but it closed } index:" + i);
                     return;
                 }
             }
 
+        }
+        if (!stack.isEmpty()) {
+            System.out.println("Error! there is opened " + (char)stack.pop() + " but dont closed");
         }
 
 
