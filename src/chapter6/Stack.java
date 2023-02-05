@@ -16,7 +16,6 @@ public class Stack {
 
     public int pop() {
         if (tos < 0) {
-            System.out.println("stack is empty");
             return 0;
         } else {
             return stck[tos--];
