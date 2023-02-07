@@ -1,4 +1,4 @@
-package classWork;
+package classWork.people;
 
 public class People {
 
