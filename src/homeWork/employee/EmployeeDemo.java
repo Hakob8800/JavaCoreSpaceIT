@@ -16,8 +16,8 @@ public class EmployeeDemo {
                     isRun = false;
                     break;
                 case "1":
-                    Employee employee = employeeStorage.createEmployee();
-                    employeeStorage.add(employee);
+                    employeeStorage.add(employeeStorage.createEmployee());
+
                     break;
                 case "2":
                     employeeStorage.print();
@@ -38,6 +38,18 @@ public class EmployeeDemo {
                             System.out.println(employee1);
                         }
                     }
+                    break;
+                case"6":
+                    employeeStorage.changePositionByID();
+                    break;
+                case"7":
+                    employeeStorage.printActiveEmployees();
+                    break;
+                case"8":
+                    employeeStorage.inActiveEmployee();
+                    break;
+                case"9":
+                    employeeStorage.activateEmployee();
                     break;
                 default:
                     System.out.println("Wrong command! Please try again.");

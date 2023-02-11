@@ -34,13 +34,11 @@ public class EmployeeStorage {
     }
 
     public Employee searchByEmployeeID() {
-        System.out.println("Please enter key word for ID");
+        System.out.println("Please input ID");
         String ID = scanner.nextLine();
-        for (Employee employee : array) {
-            if (employee != null) {
-                if (employee.getEmployeeID().equals(ID)) {
-                    return employee;
-                }
+        for (int i = 0; i < size; i++) {
+            if (array[i].getEmployeeID().equals(ID)) {
+                return array[i];
             }
         }
         System.out.println("By ID \'" + ID + "\' nothing founds");
@@ -90,12 +88,16 @@ public class EmployeeStorage {
 
     public String chooseCommand() {
         System.out.println("----------------------------------------");
-        System.out.println("For exit press 0");
-        System.out.println("For add employee press 1");
-        System.out.println("For print all employees press 2");
-        System.out.println("For search employee by ID press 3");
-        System.out.println("For search employee by company press 4");
-        System.out.println("For search employee by salary press 5");
+        System.out.println("Please input 0 for exit");
+        System.out.println("Please input 1 for add employee");
+        System.out.println("Please input 2 for print all employees");
+        System.out.println("Please input 3 for search employee by ID");
+        System.out.println("Please input 4 for search employee by company");
+        System.out.println("Please input 5 for search employee by salary");
+        System.out.println("Please input 6 for change employee position by id");
+        System.out.println("Please input 7 for print only active employees");
+        System.out.println("Please input 8 for inactive employee by id");
+        System.out.println("Please input 9 for activate employee by id");
         System.out.println("----------------------------------------");
         return scanner.nextLine();
     }
@@ -107,12 +109,10 @@ public class EmployeeStorage {
         String surname = scanner.nextLine();
         System.out.println("Please enter ID");
         String ID = scanner.nextLine();
-        for (Employee employee : array) {
-            if (employee != null) {
-                if (employee.getEmployeeID().equals(ID)) {
-                    System.out.println("ID " + ID + " has already used");
-                    return null;
-                }
+        for (int i = 0; i < size; i++) {
+            if (array[i].getEmployeeID().equals(ID)) {
+                System.out.println("ID " + ID + " has already used");
+                return null;
             }
         }
         System.out.println("Please enter salary");
@@ -123,5 +123,36 @@ public class EmployeeStorage {
         String company = scanner.nextLine();
 
         return new Employee(name, surname, ID, salary, position, company);
+    }
+
+    public void changePositionByID() {
+        Employee employee = searchByEmployeeID();
+        System.out.println("Enter new position");
+        String newPosition = scanner.nextLine();
+        employee.setPosition(newPosition);
+    }
+
+    public void printActiveEmployees() {
+        for (int i = 0; i < size; i++) {
+            if (array[i].getActive()) {
+                System.out.println(array[i]);
+            }
+        }
+    }
+
+    public void inActiveEmployee() {
+        Employee employee = searchByEmployeeID();
+        if(employee!=null){
+            employee.setActive(false);
+            System.out.println("Employee inactivated");
+        }
+    }
+
+    public void activateEmployee() {
+        Employee employee = searchByEmployeeID();
+        if(employee!=null){
+            employee.setActive(true);
+            System.out.println("Employee activated");
+        }
     }
 }
