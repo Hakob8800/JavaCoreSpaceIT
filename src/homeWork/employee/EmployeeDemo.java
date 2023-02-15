@@ -1,15 +1,20 @@
 package homeWork.employee;
 
+import java.text.ParseException;
 import java.util.Scanner;
 
 public class EmployeeDemo {
     private static final Scanner scanner = new Scanner(System.in);
     private static final EmployeeStorage employeeStorage = new EmployeeStorage();
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
 
 
         boolean isRun = true;
+        employeeStorage.add(new Employee("Mike","Smith","q1",100,"driver","meta","12/12/2010"));
+        employeeStorage.add(new Employee("Bob","Marley","q2",300,"barmen","amazon","20/11/1791"));
+        employeeStorage.add(new Employee("Milana","Macron","q3",700,"dancer","google","13/11/1999"));
+
 
         while (isRun) {
             String command = chooseCommand();
@@ -25,38 +30,57 @@ public class EmployeeDemo {
                     break;
                 case "3":
                     getEmployeeById();
-
                     break;
                 case "4":
                     System.out.println("Please input company name");
                     employeeStorage.searchByCompany(scanner.nextLine());
                     break;
                 case "5":
-                    System.out.println("Please input min value");
-                    double min = Double.parseDouble(scanner.nextLine());
-                    System.out.println("Please input max value");
-                    double max = Double.parseDouble(scanner.nextLine());
-                    employeeStorage.searchBySalary(min,max);
+                    searchBySalary();
                     break;
                 case "6":
-                    System.out.println("Please input employee id");
-                    employeeStorage.changePositionByID(scanner.nextLine());
+                    changePositionByID();
                     break;
                 case "7":
-                    employeeStorage.printActiveEmployees();
+                    employeeStorage.printByStatus(true);
                     break;
                 case "8":
-                    System.out.println("Please input employee id");
-                    employeeStorage.inActiveEmployee(scanner.nextLine());
+                    inActivateEmployee();
                     break;
                 case "9":
-                    System.out.println("Please input employee id");
-                    employeeStorage.activateEmployee(scanner.nextLine());
+                    activateEmployee();
                     break;
                 default:
                     System.out.println("Wrong command! Please try again.");
 
             }
+        }
+    }
+
+    private static void inActivateEmployee() {
+        employeeStorage.printByStatus(true);
+        System.out.println("Please choose employee ID");
+        String id = scanner.nextLine();
+        Employee employee = employeeStorage.getByEmployeeID(id);
+        if (employee == null || !employee.isActive()) {
+            System.out.println("there is not employee by id " + id+", or that employee is inactive");
+        }
+        else {
+            employee.setActive(false);
+            System.out.println("Status changed!");
+        }
+    }
+    private static void activateEmployee() {
+        employeeStorage.printByStatus(true);
+        System.out.println("Please choose employee ID");
+        String id = scanner.nextLine();
+        Employee employee = employeeStorage.getByEmployeeID(id);
+        if (employee == null || employee.isActive()) {
+            System.out.println("there is not employee by id " + id+", or that employee is active");
+        }
+        else {
+            employee.setActive(true);
+            System.out.println("Status changed!");
         }
     }
 
@@ -88,26 +112,46 @@ public class EmployeeDemo {
         return scanner.nextLine();
     }
 
-    private static void addEmployee() {
-        System.out.println("Please enter name,surname,employeeId,salary,position,company");
+    private static void addEmployee() throws ParseException {
+        System.out.println("Please enter name,surname,employeeId,salary,position,company,birthday(DD/MM/YYYY)");
         String employeeDataStr = scanner.nextLine();
         String[] employeeData = employeeDataStr.split(",");
         String id = employeeData[2];
         Employee employee = employeeStorage.getByEmployeeID(id);
         if (employee == null) {
             Employee employee1 = new Employee(employeeData[0], employeeData[1], id, Double.parseDouble(employeeData[3]),
-                    employeeData[4], employeeData[5]);
+                    employeeData[4], employeeData[5],employeeData[6]);
             employeeStorage.add(employee1);
             System.out.println("Employee was added");
         } else System.out.println("Employee by id " + id + " is already exist");
     }
 
-    private static void inputForSearchBySalary() {
+    private static void searchBySalary() {
         System.out.println("Please enter MIN salary for search");
         double min = Double.parseDouble(scanner.nextLine());
         System.out.println("Please enter MAX salary for search");
         double max = Double.parseDouble(scanner.nextLine());
-        System.out.println("There is not any employee with salary in range from " + min + " to " + max);
+        if (max < min) {
+            System.out.println("min value must be less than maxValue, please try again");
+            return;
+        } else {
+            employeeStorage.searchBySalary(min, max);
+        }
+    }
+
+    private static void changePositionByID() {
+        employeeStorage.printByStatus(true);
+        System.out.println("Please choose employee ID");
+        String id = scanner.nextLine();
+        Employee employee = employeeStorage.getByEmployeeID(id);
+        if (employee == null || !employee.isActive()) {
+            System.out.println("there is not employee by id " + id+", or that employee is inactive");
+        } else {
+            System.out.println("Please input new position name");
+            String newPosition = scanner.nextLine();
+            employee.setPosition(newPosition);
+            System.out.println("Position has changed!");
+        }
     }
 
 

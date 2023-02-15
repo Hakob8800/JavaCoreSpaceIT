@@ -24,6 +24,15 @@ public class EmployeeStorage {
         }
     }
 
+    public void printByStatus(boolean isActive) {
+        for (int i = 0; i < size; i++) {
+            if (array[i].isActive() == isActive) {
+                System.out.println(array[i] + " ");
+            }
+
+        }
+    }
+
     private void extend() {
         Employee[] tmp = new Employee[array.length + 10];
         for (int i = 0; i < array.length; i++) {
@@ -40,14 +49,16 @@ public class EmployeeStorage {
         }
         return null;
     }
-    public void searchByCompany(String company) {
+
+    public void searchByCompany(String companyName) {
         for (int i = 0; i < size; i++) {
             Employee employee = array[i];
-            if (employee.getCompany().equalsIgnoreCase(company.toLowerCase())) {
+            if (employee.getCompany().equalsIgnoreCase(companyName)) {
                 System.out.println(array[i]);
             }
         }
     }
+
     public void searchBySalary(double min, double max) {
         for (int i = 0; i < size; i++) {
             double empSalary = array[i].getSalary();
@@ -57,35 +68,4 @@ public class EmployeeStorage {
         }
     }
 
-
-    public void changePositionByID(String id) {
-        Employee employee = getByEmployeeID(id);
-        System.out.println("Enter new position");
-        String newPosition = scanner.nextLine();
-        employee.setPosition(newPosition);
-    }
-
-    public void printActiveEmployees() {
-        for (int i = 0; i < size; i++) {
-            if (array[i].getActive()) {
-                System.out.println(array[i]);
-            }
-        }
-    }
-
-    public void inActiveEmployee(String id) {
-        Employee employee = getByEmployeeID(id);
-        if (employee != null) {
-            employee.setActive(false);
-            System.out.println("Employee inactivated");
-        }
-    }
-
-    public void activateEmployee(String id) {
-        Employee employee = getByEmployeeID(id);
-        if (employee != null) {
-            employee.setActive(true);
-            System.out.println("Employee activated");
-        }
-    }
 }

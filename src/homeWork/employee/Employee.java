@@ -1,9 +1,13 @@
 package homeWork.employee;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
 
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String name;
     private String surname;
     private String employeeID;
@@ -12,20 +16,26 @@ public class Employee {
     private String company;
     private boolean active = true;
 
-    public Employee(String name, String surname, String employeeID, double salary, String position, String company) {
+    private Date registerDate;
+    private Date dateOfBirth;
+
+
+    public Employee(String name, String surname, String employeeID, double salary, String position, String company, String dateOfBirth) throws ParseException {
         this.name = name;
         this.surname = surname;
         this.employeeID = employeeID;
         this.salary = salary;
         this.position = position;
         this.company = company;
+        registerDate = new Date();
+        this.dateOfBirth = sdf.parse(dateOfBirth);
     }
 
     public Employee() {
 
     }
 
-    public boolean getActive() {
+    public boolean isActive() {
         return active;
     }
 
@@ -81,22 +91,38 @@ public class Employee {
         this.company = company;
     }
 
+    public String getRegisterDate() {
+        return sdf.format(registerDate);
+    }
+
+    public String getDateOfBirth() {
+        return sdf.format(dateOfBirth);
+    }
+
+    public void setDateOfBirth(String dateOfBirth) throws ParseException {
+        this.dateOfBirth = sdf.parse(dateOfBirth);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Double.compare(employee.salary, salary) == 0 && active == employee.active && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname) && Objects.equals(employeeID, employee.employeeID) && Objects.equals(position, employee.position) && Objects.equals(company, employee.company);
+        return Double.compare(employee.salary, salary) == 0 && active == employee.active && Objects.equals(sdf, employee.sdf)
+                && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname)
+                && Objects.equals(employeeID, employee.employeeID) && Objects.equals(position, employee.position)
+                && Objects.equals(company, employee.company) && Objects.equals(registerDate, employee.registerDate)
+                && Objects.equals(dateOfBirth, employee.dateOfBirth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, employeeID, salary, position, company, active);
+        return Objects.hash(name, surname, employeeID, salary, position, company, active, dateOfBirth, registerDate);
     }
 
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Employee{"+
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", employeeID='" + employeeID + '\'' +
@@ -104,6 +130,8 @@ public class Employee {
                 ", position='" + position + '\'' +
                 ", company='" + company + '\'' +
                 ", active=" + active +
+                ", registerDate=" + sdf.format(registerDate) +
+                ", dateOfBirth=" + sdf.format(dateOfBirth) +
                 '}';
     }
 }
