@@ -1,34 +1,33 @@
-package homeWork.employee;
+package homeWork.employeesAndCompanys.model;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
+import homeWork.employeesAndCompanys.util.DateUtil;
+
 import java.util.Date;
 import java.util.Objects;
 
 public class Employee {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
     private String name;
     private String surname;
     private String employeeID;
     private double salary;
     private String position;
-    private String company;
+    private Company company;
     private boolean active = true;
-
     private Date registerDate;
     private Date dateOfBirth;
 
 
-    public Employee(String name, String surname, String employeeID, double salary, String position, String company, String dateOfBirth) throws ParseException {
+    public Employee(String name, String surname, String employeeID, double salary, String position, Company company,
+                    Date dateOfBirth, Date registerDate) {
         this.name = name;
         this.surname = surname;
         this.employeeID = employeeID;
         this.salary = salary;
         this.position = position;
         this.company = company;
-        registerDate = new Date();
-        this.dateOfBirth = sdf.parse(dateOfBirth);
+        this.dateOfBirth = dateOfBirth;
+        this.registerDate = registerDate;
     }
 
     public Employee() {
@@ -83,24 +82,28 @@ public class Employee {
         this.position = position;
     }
 
-    public String getCompany() {
+    public Company getCompany() {
         return company;
     }
 
-    public void setCompany(String company) {
+    public void setCompany(Company company) {
         this.company = company;
     }
 
-    public String getRegisterDate() {
-        return sdf.format(registerDate);
+    public Date getRegisterDate() {
+        return registerDate;
     }
 
-    public String getDateOfBirth() {
-        return sdf.format(dateOfBirth);
+    public void setRegisterDate(Date registerDate) {
+        this.registerDate = registerDate;
     }
 
-    public void setDateOfBirth(String dateOfBirth) throws ParseException {
-        this.dateOfBirth = sdf.parse(dateOfBirth);
+    public Date getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
@@ -108,30 +111,29 @@ public class Employee {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Employee employee = (Employee) o;
-        return Double.compare(employee.salary, salary) == 0 && active == employee.active && Objects.equals(sdf, employee.sdf)
-                && Objects.equals(name, employee.name) && Objects.equals(surname, employee.surname)
-                && Objects.equals(employeeID, employee.employeeID) && Objects.equals(position, employee.position)
-                && Objects.equals(company, employee.company) && Objects.equals(registerDate, employee.registerDate)
-                && Objects.equals(dateOfBirth, employee.dateOfBirth);
+        return Double.compare(employee.salary, salary) == 0 && active == employee.active && Objects.equals(name, employee.name)
+                && Objects.equals(surname, employee.surname) && Objects.equals(employeeID, employee.employeeID)
+                && Objects.equals(position, employee.position) && Objects.equals(company, employee.company)
+                && Objects.equals(registerDate, employee.registerDate) && Objects.equals(dateOfBirth, employee.dateOfBirth);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, surname, employeeID, salary, position, company, active, dateOfBirth, registerDate);
+        return Objects.hash(name, surname, employeeID, salary, position, company, active, registerDate, dateOfBirth);
     }
 
     @Override
     public String toString() {
-        return "Employee{"+
+        return "Employee{" +
                 "name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", employeeID='" + employeeID + '\'' +
                 ", salary=" + salary +
-                ", position='" + position + '\'' +
-                ", company='" + company + '\'' +
+                ", position='" + position + '\'' +", "+
+                company.toStringIdName() + '\'' +
                 ", active=" + active +
-                ", registerDate=" + sdf.format(registerDate) +
-                ", dateOfBirth=" + sdf.format(dateOfBirth) +
+                ", registerDate=" + DateUtil.dateToString(registerDate) +
+                ", dateOfBirth=" + DateUtil.dateToString(dateOfBirth) +
                 '}';
     }
 }
