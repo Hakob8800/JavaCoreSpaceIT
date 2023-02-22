@@ -14,11 +14,11 @@ public class Main implements Commands {
 
     public static void main(String[] args) throws ParseException {
         boolean isRun = true;
-        Doctor doc1 = new Doctor("d1","petya","kurxinyan","34040","f@mail.ru","duntist");
-        Doctor doc2 = new Doctor("d2","vasya","pucin","39090","w@mail.ru","ortopevt");
-        Doctor doc3 = new Doctor("d3","bob","smith","29080","r@mail.ru","xirurg");
-        Patient pat1 = new Patient("p1","yana","dyan","34567",doc1,new Date());
-        Patient pat2 = new Patient("p2","gana","tyan","34567",doc2,DateUtil.stringToDate("11-11 11/11/2000"));
+        Doctor doc1 = new Doctor("d1", "petya", "kurxinyan", "34040", "f@mail.ru", "duntist");
+        Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", "ortopevt");
+        Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", "xirurg");
+        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, new Date());
+        Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, DateUtil.stringToDate("11-11 11/11/2000"));
         storage.add(doc1);
         storage.add(doc2);
         storage.add(doc3);
@@ -98,7 +98,7 @@ public class Main implements Commands {
         try {
             String dateStr = scanner.nextLine();
             Date dateForRegister = DateUtil.stringToDate(dateStr);
-            if(storage.compeareDate(dateForRegister,doctorForRegister)){
+            if (storage.compeareDate(dateForRegister, doctorForRegister)) {
                 System.out.println("The time you have chosen is already occupied please select another time or another doctor.");
                 return;
             }
@@ -136,7 +136,7 @@ public class Main implements Commands {
             doctorById.setPhoneNumber(newData[2]);
             doctorById.setEmail(newData[3]);
             doctorById.setProfession(newData[4]);
-        }catch (ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input 5 data: id,name,surName,phoneNumber,email,profession");
         }
     }

@@ -76,7 +76,7 @@ public class Storage {
     public void deleteDoctor(String doctorById) {
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Doctor && storage[i].getId().equals(doctorById)) {
-                for (int j = i; j < size-1; j++) {
+                for (int j = i; j < size - 1; j++) {
                     storage[j] = storage[j + 1];
                 }
             }
@@ -90,11 +90,11 @@ public class Storage {
         int month = today.getMonth();
         int day = today.getDay();
         for (int i = 0; i < size; i++) {
-            if(storage[i] instanceof Patient){
-                Date patientDate =((Patient) storage[i]).getRegisterTime();
-               if(patientDate.getYear()==year&&patientDate.getMonth()==month&&patientDate.getDay()==day){
-                   System.out.println(storage[i]);
-               }
+            if (storage[i] instanceof Patient) {
+                Date patientDate = ((Patient) storage[i]).getRegisterTime();
+                if (patientDate.getYear() == year && patientDate.getMonth() == month && patientDate.getDay() == day) {
+                    System.out.println(storage[i]);
+                }
             }
         }
     }

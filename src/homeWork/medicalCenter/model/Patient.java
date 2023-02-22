@@ -5,7 +5,7 @@ import homeWork.medicalCenter.util.DateUtil;
 import java.util.Date;
 import java.util.Objects;
 
-public class Patient extends Person{
+public class Patient extends Person {
     private Doctor toTheDoctor;
     private Date registerTime;
 
