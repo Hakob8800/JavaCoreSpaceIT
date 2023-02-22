@@ -86,9 +86,13 @@ public class Storage {
 
     public void printTodaysPatients() {
         Date today = new Date();
+        int year = today.getYear();
+        int month = today.getMonth();
+        int day = today.getDay();
         for (int i = 0; i < size; i++) {
             if(storage[i] instanceof Patient){
-               if( ((Patient) storage[i]).getRegisterTime().equals(today)){
+                Date patientDate =((Patient) storage[i]).getRegisterTime();
+               if(patientDate.getYear()==year&&patientDate.getMonth()==month&&patientDate.getDay()==day){
                    System.out.println(storage[i]);
                }
             }
