@@ -18,7 +18,7 @@ public class Main implements Commands {
         Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", "ortopevt");
         Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", "xirurg");
         Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, DateUtil.stringToDate("12-12 13/12/2002"));
-        Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, DateUtil.stringToDate("11-11 11/11/2000"));
+        Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, new Date());
         storage.add(doc1);
         storage.add(doc2);
         storage.add(doc3);
