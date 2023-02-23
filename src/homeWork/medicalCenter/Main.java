@@ -70,7 +70,7 @@ public class Main implements Commands {
             return;
         }
         storage.deleteDoctor(doctorById);
-
+        System.out.println("Doctor deleted.");
     }
 
     private static void printPatientsByDoctor() {
@@ -146,6 +146,7 @@ public class Main implements Commands {
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input 5 data: id,name,surName,phoneNumber,email,profession");
         }
+        System.out.println("Doctor's data was changed.");
     }
 
 
