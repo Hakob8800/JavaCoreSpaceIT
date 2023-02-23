@@ -63,16 +63,6 @@ public class Storage {
         return null;
     }
 
-    public boolean compeareDate(Date dateForRegister, Doctor doctor) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i] instanceof Patient) {
-                Patient patient = (Patient) storage[i];
-                return patient.getToTheDoctor().getId().equals(doctor.getId()) && patient.getRegisterTime().equals(dateForRegister);
-            }
-        }
-        return false;
-    }
-
     public void deleteDoctor(String doctorById) {
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Doctor && storage[i].getId().equals(doctorById)) {
@@ -97,5 +87,15 @@ public class Storage {
                 }
             }
         }
+    }
+
+    public Patient getPatientById(String patientId) {
+        for (int i = 0; i < size; i++) {
+            if (storage[i].getId().equals(patientId)) {
+                if (storage[i] instanceof Patient)
+                    return (Patient) storage[i];
+            }
+        }
+        return null;
     }
 }

@@ -94,17 +94,24 @@ public class Main implements Commands {
             System.out.println("Doctor by id:" + doctorById + " does not exists. Please try again.");
             return;
         }
-        System.out.println("Please choose time for register(format: hh-mm dd/MM/yyyy");
+        System.out.println("Please choose time for register (format: hh-mm dd/MM/yyyy)");
         try {
             String dateStr = scanner.nextLine();
             Date dateForRegister = DateUtil.stringToDate(dateStr);
-            if (storage.compeareDate(dateForRegister, doctorForRegister)) {
-                System.out.println("The time you have chosen is already occupied please select another time or another doctor.");
-                return;
+            for (Patient p : storage.searchPatientsByDoctor(doctorForRegister)) {
+                if (p.getRegisterTime().equals(dateForRegister)) {
+                    System.out.println("The time you have chosen is already occupied please select another time or another doctor.");
+                    return;
+                }
             }
             System.out.println("Please input patient's id,name,surname,phoneNumber");
             String patientDataStr = scanner.nextLine();
             String[] patientData = patientDataStr.split(",");
+            String patientId = patientData[0];
+            if (storage.getPatientById(patientId) != null) {
+                System.out.println("Patient by id:" + patientId + " already registered. please try again and input another ID");
+                return;
+            }
             Patient patient = new Patient(patientData[0], patientData[1], patientData[2], patientData[3], doctorForRegister, dateForRegister);
             storage.add(patient);
             System.out.println("Patient registered!");
