@@ -56,7 +56,7 @@ public class Patient extends Person {
                 ", name='" + getName() + '\'' +
                 ", surname='" + getSurname() + '\'' +
                 ", phoneNumber='" + getPhoneNumber() + '\'' +
-                ", to the doctor='Dc. " + toTheDoctor.forShowInPatient() + '\'' +
+                ", to the doctor='Dc. " + toTheDoctor.forShow() + '\'' +
                 ", registerTime='" + DateUtil.dateToString(registerTime) + '\'' +
                 '}';
     }

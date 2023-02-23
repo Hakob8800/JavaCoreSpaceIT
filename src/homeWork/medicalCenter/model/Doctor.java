@@ -59,7 +59,7 @@ public class Doctor extends Person {
                 '}';
     }
 
-    public String forShowInPatient() {
+    public String forShow() {
         return this.getName() + ", id:" + this.getId();
     }
 }

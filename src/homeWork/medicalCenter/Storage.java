@@ -4,7 +4,6 @@ import homeWork.medicalCenter.model.Doctor;
 import homeWork.medicalCenter.model.Patient;
 import homeWork.medicalCenter.model.Person;
 
-import javax.print.Doc;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,14 +22,6 @@ public class Storage {
     public void printDoctors() {
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Doctor) {
-                System.out.println(storage[i]);
-            }
-        }
-    }
-
-    public void printDoctorByProfession(String profession) {
-        for (int i = 0; i < size; i++) {
-            if (storage[i] instanceof Doctor && ((Doctor) storage[i]).getProfession().equals(profession)) {
                 System.out.println(storage[i]);
             }
         }
@@ -69,12 +60,14 @@ public class Storage {
                 for (int j = i; j < size - 1; j++) {
                     storage[j] = storage[j + 1];
                 }
+                size--;
+                break;
             }
         }
-        size--;
     }
 
-    public void printTodaysPatients() {
+    public List<Patient> getTodayPatients() {
+        List<Patient> patients = new ArrayList<>();
         Date today = new Date();
         int year = today.getYear();
         int month = today.getMonth();
@@ -83,10 +76,11 @@ public class Storage {
             if (storage[i] instanceof Patient) {
                 Date patientDate = ((Patient) storage[i]).getRegisterTime();
                 if (patientDate.getYear() == year && patientDate.getMonth() == month && patientDate.getDay() == day) {
-                    System.out.println(storage[i]);
+                    patients.add((Patient) storage[i]);
                 }
             }
         }
+        return patients;
     }
 
     public Patient getPatientById(String patientId) {
@@ -94,6 +88,17 @@ public class Storage {
             if (storage[i].getId().equals(patientId)) {
                 if (storage[i] instanceof Patient)
                     return (Patient) storage[i];
+            }
+        }
+        return null;
+    }
+
+    public List<Doctor> getDoctorByProfession(String doctorProfession) {
+        List<Doctor> doctors = new ArrayList<>();
+        for (int i = 0; i < size; i++) {
+            if (storage[i] instanceof Doctor) {
+                if (((Doctor) storage[i]).getProfession().equals(doctorProfession))
+                    doctors.add((Doctor) storage[i]);
             }
         }
         return null;

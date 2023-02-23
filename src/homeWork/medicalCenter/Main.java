@@ -17,7 +17,7 @@ public class Main implements Commands {
         Doctor doc1 = new Doctor("d1", "petya", "kurxinyan", "34040", "f@mail.ru", "duntist");
         Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", "ortopevt");
         Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", "xirurg");
-        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, new Date());
+        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, DateUtil.stringToDate("12-12 13/12/2002"));
         Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, DateUtil.stringToDate("11-11 11/11/2000"));
         storage.add(doc1);
         storage.add(doc2);
@@ -50,7 +50,7 @@ public class Main implements Commands {
                     printPatientsByDoctor();
                     break;
                 case PRINT_TODAYS_PATIENTS:
-                    storage.printTodaysPatients();
+                    printTodayPatients();
                     break;
                 default:
                     System.out.println("Wrong command! Please try again.");
@@ -58,6 +58,16 @@ public class Main implements Commands {
 
         }
 
+    }
+
+    private static void printTodayPatients() {
+        if(storage.getTodayPatients().isEmpty()){
+            System.out.println("There are no patients for today");
+            return;
+        }
+        for (Patient todayPatient : storage.getTodayPatients()) {
+            System.out.println(todayPatient);
+        }
     }
 
     private static void deleteDoctorById() {
@@ -82,7 +92,12 @@ public class Main implements Commands {
             System.out.println("Doctor by id:" + doctorId + " does not exists. Please try again.");
             return;
         }
-        System.out.println(storage.searchPatientsByDoctor(doctorForPrintPatients));
+        if(storage.searchPatientsByDoctor(doctorForPrintPatients).isEmpty()){
+            System.out.println(doctorForPrintPatients.forShow()+" has no patients");
+        }
+        for (Patient patient : storage.searchPatientsByDoctor(doctorForPrintPatients)) {
+            System.out.println(patient);
+        }
     }
 
     private static void addPatient() {
@@ -170,6 +185,14 @@ public class Main implements Commands {
 
     private static void searchDoctorByProfession() {
         System.out.println("PLease input profession for search");
-        storage.printDoctorByProfession(scanner.nextLine());
+        String doctorProfession = scanner.nextLine();
+        Doctor doctorByProfession = storage.getDoctorById(doctorProfession);
+        if (doctorByProfession == null) {
+            System.out.println("Doctor by profession:" + doctorProfession + " does not exists. Please try again.");
+            return;
+        }
+        for (Object doctor : storage.getDoctorByProfession(doctorProfession)) {
+            System.out.println(doctor);
+        }
     }
 }
