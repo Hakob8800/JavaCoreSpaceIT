@@ -1,5 +1,6 @@
 package homeWork.medicalCenter;
 
+import homeWork.medicalCenter.commands.Commands;
 import homeWork.medicalCenter.model.Doctor;
 import homeWork.medicalCenter.model.Patient;
 import homeWork.medicalCenter.util.DateUtil;
@@ -10,14 +11,14 @@ import java.util.Scanner;
 
 public class Main implements Commands {
     private static final Scanner scanner = new Scanner(System.in);
-    private static Storage storage = new Storage();
+    private static final Storage storage = new Storage();
 
     public static void main(String[] args) throws ParseException {
         boolean isRun = true;
-        Doctor doc1 = new Doctor("d1", "petya", "kurxinyan", "34040", "f@mail.ru", "duntist");
-        Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", "ortopevt");
-        Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", "xirurg");
-        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, DateUtil.stringToDate("12-12 13/12/2002"));
+        Doctor doc1 = new Doctor("d1", "petya", "kurxinyan", "34040", "f@mail.ru", Profession.INTERNISTS);
+        Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", Profession.PSYCHIATRISTS);
+        Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", Profession.FAMILY_PHYSICIANS);
+        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, DateUtil.stringToDate("12:12 26/02/2023"));
         Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, new Date());
         storage.add(doc1);
         storage.add(doc2);
@@ -61,7 +62,7 @@ public class Main implements Commands {
     }
 
     private static void printTodayPatients() {
-        if(storage.getTodayPatients().isEmpty()){
+        if (storage.getTodayPatients().isEmpty()) {
             System.out.println("There are no patients for today");
             return;
         }
@@ -92,8 +93,8 @@ public class Main implements Commands {
             System.out.println("Doctor by id:" + doctorId + " does not exists. Please try again.");
             return;
         }
-        if(storage.searchPatientsByDoctor(doctorForPrintPatients).isEmpty()){
-            System.out.println(doctorForPrintPatients.forShow()+" has no patients");
+        if (storage.searchPatientsByDoctor(doctorForPrintPatients).isEmpty()) {
+            System.out.println(doctorForPrintPatients.forShow() + " has no patients");
         }
         for (Patient patient : storage.searchPatientsByDoctor(doctorForPrintPatients)) {
             System.out.println(patient);
@@ -109,7 +110,7 @@ public class Main implements Commands {
             System.out.println("Doctor by id:" + doctorById + " does not exists. Please try again.");
             return;
         }
-        System.out.println("Please choose time for register (format: hh-mm dd/MM/yyyy)");
+        System.out.println("Please choose time for register (format: hh:mm dd/MM/yyyy)");
         try {
             String dateStr = scanner.nextLine();
             Date dateForRegister = DateUtil.stringToDate(dateStr);
@@ -131,7 +132,7 @@ public class Main implements Commands {
             storage.add(patient);
             System.out.println("Patient registered!");
         } catch (ParseException e) {
-            System.out.println("Please input in format 23-20 30/11/2023");
+            System.out.println("Please input in format 13:45 20/11/2023");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input 4 data: id,name,surName,phoneNumber");
         }
@@ -166,7 +167,7 @@ public class Main implements Commands {
 
 
     private static void addDoctor() {
-        System.out.println("Please input doctor's ID,name,surname,phoneNumber,email,profession");
+        System.out.println("Please input doctor's ID,name,surname,phoneNumber,email");
         String doctorDataStr = scanner.nextLine();
         String[] doctorData = doctorDataStr.split(",");
         String newId = doctorData[0];
@@ -174,12 +175,17 @@ public class Main implements Commands {
             System.out.println("Doctor with id:" + newId + " already exist. Please choose another Id.");
             return;
         }
+        Commands.printProfessions();
+        String professionStr = scanner.nextLine();
         try {
-            Doctor doctor = new Doctor(newId, doctorData[1], doctorData[2], doctorData[3], doctorData[4], doctorData[5]);
+            Profession profession = Profession.valueOf(professionStr);
+            Doctor doctor = new Doctor(newId, doctorData[1], doctorData[2], doctorData[3], doctorData[4], profession);
             storage.add(doctor);
             System.out.println("Doctor was added!");
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Please input 6 data: id,name,surName,phoneNumber,email,profession");
+        } catch (IllegalArgumentException e) {
+            System.out.println("Illegal profession. Try again");
         }
     }
 

@@ -1,4 +1,4 @@
-package homeWork.medicalCenter;
+package homeWork.medicalCenter.commands;
 
 public interface Commands {
     String EXIT = "0";
@@ -20,6 +20,14 @@ public interface Commands {
         System.out.println("Please input " + ADD_PATIENT + " for add patient");
         System.out.println("Please input " + PRINT_ALL_PATIENTS_BY_DOCTOR + " for print all patients by doctor");
         System.out.println("Please input " + PRINT_TODAYS_PATIENTS + " for print today's patients");
+    }
+
+    static void printProfessions(){
+        System.out.println("Please choose one of those professions");
+        System.out.println("FAMILY_PHYSICIANS");
+        System.out.println("INTERNISTS");
+        System.out.println("EMERGENCY_PHYSICIANS");
+        System.out.println("PSYCHIATRISTS");
     }
 
 }

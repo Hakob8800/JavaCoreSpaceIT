@@ -3,6 +3,7 @@ package homeWork.medicalCenter;
 import homeWork.medicalCenter.model.Doctor;
 import homeWork.medicalCenter.model.Patient;
 import homeWork.medicalCenter.model.Person;
+import homeWork.medicalCenter.util.DateUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +17,10 @@ public class Storage {
     public void add(Person person) {
         if (size == storage.length) {
             extend();
-        } else storage[size++] = person;
+        }
+        if (person != null) {
+            storage[size++] = person;
+        }
     }
 
     public void printDoctors() {
@@ -67,6 +71,7 @@ public class Storage {
                     storage[j] = storage[j + 1];
                 }
                 size--;
+                break;
             }
         }
     }
@@ -74,13 +79,10 @@ public class Storage {
     public List<Patient> getTodayPatients() {
         List<Patient> patients = new ArrayList<>();
         Date today = new Date();
-        int year = today.getYear();
-        int month = today.getMonth();
-        int day = today.getDay();
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Patient) {
                 Date patientDate = ((Patient) storage[i]).getRegisterTime();
-                if (patientDate.getYear() == year && patientDate.getMonth() == month && patientDate.getDay() == day) {
+                if (DateUtil.isSameDay(today,patientDate)) {
                     patients.add((Patient) storage[i]);
                 }
             }
