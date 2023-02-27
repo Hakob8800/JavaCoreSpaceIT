@@ -93,11 +93,13 @@ public class Main implements Commands {
             System.out.println("Doctor by id:" + doctorId + " does not exists. Please try again.");
             return;
         }
-        if (storage.searchPatientsByDoctor(doctorForPrintPatients).isEmpty()) {
+        if (storage.searchPatientsByDoctor(doctorForPrintPatients).length == 0) {
             System.out.println(doctorForPrintPatients.forShow() + " has no patients");
-        }
-        for (Patient patient : storage.searchPatientsByDoctor(doctorForPrintPatients)) {
-            System.out.println(patient);
+            return;
+        } else {
+            for (Patient patient : storage.searchPatientsByDoctor(doctorForPrintPatients)) {
+                System.out.println(patient);
+            }
         }
     }
 
@@ -190,15 +192,22 @@ public class Main implements Commands {
     }
 
     private static void searchDoctorByProfession() {
-        System.out.println("PLease input profession for search");
-        String doctorProfession = scanner.nextLine();
-        Doctor doctorByProfession = storage.getDoctorById(doctorProfession);
-        if (doctorByProfession == null) {
-            System.out.println("Doctor by profession:" + doctorProfession + " does not exists. Please try again.");
-            return;
+        System.out.println("PLease choose profession end input it for search doctor");
+        for (Profession profession : Profession.values()) {
+            System.out.println(profession);
         }
-        for (Object doctor : storage.getDoctorByProfession(doctorProfession)) {
-            System.out.println(doctor);
+        String doctorProfession = scanner.nextLine();
+        try {
+            Profession prof = Profession.valueOf(doctorProfession);
+            if (storage.getDoctorByProfession(prof).length == 0) {
+                System.out.println("Doctor by profession:" + doctorProfession + " does not exists yet.");
+                return;
+            }
+            for (Doctor doctor : storage.getDoctorByProfession(prof)) {
+                System.out.println(doctor);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println("there is not profession " + doctorProfession);
         }
     }
 }

@@ -31,14 +31,25 @@ public class Storage {
         }
     }
 
-    public List<Patient> searchPatientsByDoctor(Doctor doctor) {
-        List<Patient> patients = new ArrayList();
+    public Patient[] searchPatientsByDoctor(Doctor doctor) {
+        int searchSize = 0;
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Patient) {
                 if (((Patient) storage[i]).getToTheDoctor().equals(doctor))
-                    patients.add((Patient) storage[i]);
+                    searchSize++;
             }
         }
+        Patient[] patients = new Patient[searchSize];
+        int j = 0;
+        for (int i = 0; i < size; i++) {
+            if (storage[i] instanceof Patient) {
+                if (((Patient) storage[i]).getToTheDoctor().equals(doctor)) {
+                    patients[j] = (Patient) storage[i];
+                    j++;
+                }
+            }
+        }
+
         return patients;
     }
 
@@ -82,7 +93,7 @@ public class Storage {
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Patient) {
                 Date patientDate = ((Patient) storage[i]).getRegisterTime();
-                if (DateUtil.isSameDay(today,patientDate)) {
+                if (DateUtil.isSameDay(today, patientDate)) {
                     patients.add((Patient) storage[i]);
                 }
             }
@@ -100,14 +111,24 @@ public class Storage {
         return null;
     }
 
-    public List<Doctor> getDoctorByProfession(String doctorProfession) {
-        List<Doctor> doctors = new ArrayList<>();
+    public Doctor[] getDoctorByProfession(Profession profession) {
+        int searchSize = 0;
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Doctor) {
-                if (((Doctor) storage[i]).getProfession().equals(doctorProfession))
-                    doctors.add((Doctor) storage[i]);
+                if (((Doctor) storage[i]).getProfession() == profession)
+                    searchSize++;
             }
         }
-        return null;
+        Doctor[] doctors = new Doctor[searchSize];
+        int j = 0;
+        for (int i = 0; i < size; i++) {
+            if (storage[i] instanceof Doctor) {
+                if (((Doctor) storage[i]).getProfession() == profession) {
+                    doctors[j] = (Doctor) storage[i];
+                    j++;
+                }
+            }
+        }
+        return doctors;
     }
 }
