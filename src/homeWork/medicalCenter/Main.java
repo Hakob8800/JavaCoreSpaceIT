@@ -62,7 +62,7 @@ public class Main implements Commands {
     }
 
     private static void printTodayPatients() {
-        if (storage.getTodayPatients().isEmpty()) {
+        if (storage.getTodayPatients().length == 0) {
             System.out.println("There are no patients for today");
             return;
         }
@@ -95,7 +95,6 @@ public class Main implements Commands {
         }
         if (storage.searchPatientsByDoctor(doctorForPrintPatients).length == 0) {
             System.out.println(doctorForPrintPatients.forShow() + " has no patients");
-            return;
         } else {
             for (Patient patient : storage.searchPatientsByDoctor(doctorForPrintPatients)) {
                 System.out.println(patient);
@@ -207,7 +206,7 @@ public class Main implements Commands {
                 System.out.println(doctor);
             }
         } catch (IllegalArgumentException e) {
-            System.out.println("there is not profession " + doctorProfession);
+            System.out.println("There is not profession \"" + doctorProfession + "\".");
         }
     }
 }

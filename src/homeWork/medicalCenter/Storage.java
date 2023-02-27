@@ -5,10 +5,7 @@ import homeWork.medicalCenter.model.Patient;
 import homeWork.medicalCenter.model.Person;
 import homeWork.medicalCenter.util.DateUtil;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
-
 public class Storage {
 
     private Person[] storage = new Person[10];
@@ -87,18 +84,29 @@ public class Storage {
         }
     }
 
-    public List<Patient> getTodayPatients() {
-        List<Patient> patients = new ArrayList<>();
+    public Patient[] getTodayPatients() {
+        int searchSize = 0;
         Date today = new Date();
         for (int i = 0; i < size; i++) {
             if (storage[i] instanceof Patient) {
                 Date patientDate = ((Patient) storage[i]).getRegisterTime();
                 if (DateUtil.isSameDay(today, patientDate)) {
-                    patients.add((Patient) storage[i]);
+                    searchSize++;
                 }
             }
         }
-        return patients;
+        Patient[] todayPatients = new Patient[searchSize];
+        int j = 0;
+        for (int i = 0; i < size; i++) {
+            if (storage[i] instanceof Patient) {
+                Date patientDate = ((Patient) storage[i]).getRegisterTime();
+                if (DateUtil.isSameDay(today, patientDate)) {
+                    todayPatients[j] = (Patient) storage[i];
+                    j++;
+                }
+            }
+        }
+        return todayPatients;
     }
 
     public Patient getPatientById(String patientId) {
