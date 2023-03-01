@@ -15,11 +15,11 @@ public class Main implements Commands {
 
     public static void main(String[] args) throws ParseException {
         boolean isRun = true;
-        Doctor doc1 = new Doctor("d1", "petya", "kurxinyan", "34040", "f@mail.ru", Profession.INTERNISTS);
-        Doctor doc2 = new Doctor("d2", "vasya", "pucin", "39090", "w@mail.ru", Profession.PSYCHIATRISTS);
-        Doctor doc3 = new Doctor("d3", "bob", "smith", "29080", "r@mail.ru", Profession.FAMILY_PHYSICIANS);
-        Patient pat1 = new Patient("p1", "yana", "dyan", "34567", doc1, DateUtil.stringToDate("12:12 26/02/2023"));
-        Patient pat2 = new Patient("p2", "gana", "tyan", "34567", doc2, new Date());
+        Doctor doc1 = new Doctor("d1", "Jack", "Jordan", "34040", "f@mail.ru", Profession.INTERNISTS);
+        Doctor doc2 = new Doctor("d2", "Oliver", "Johnson", "39090", "w@mail.ru", Profession.PSYCHIATRISTS);
+        Doctor doc3 = new Doctor("d3", "Harry", "Smith", "29080", "r@mail.ru", Profession.FAMILY_PHYSICIANS);
+        Patient pat1 = new Patient("p1", "Tomas", "Brown", "34567", doc1, DateUtil.stringToDate("12:12 26/02/2023"));
+        Patient pat2 = new Patient("p2", "Oscar", "Davis", "34567", doc2, new Date());
         storage.add(doc1);
         storage.add(doc2);
         storage.add(doc3);
