@@ -19,15 +19,15 @@ public class GenericStorage<T> {
         arr[size++] = (T) t;
     }
 
-    public T[] getElements(){
-        return arr;
+    public <T> T[] getElements() {
+        return null;
     }
 
-    public int size(){
+    public int size() {
         return size;
     }
 
-    public T getElement(int index){
+    public T getElement(int index) {
         return arr[index];
     }
 

@@ -30,6 +30,7 @@ public class CollectionsExample {
         for (Student student : students) {
             System.out.println(student);
         }
+        students.toArray();
 
     }
     private static class Student implements Comparable<Student>{
