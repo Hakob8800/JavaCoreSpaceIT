@@ -1,7 +1,5 @@
 package chapter14;
 
-import java.util.Arrays;
-
 public class GenericStorageDemo {
     public static void main(String[] args) throws NoSuchFieldException {
 

@@ -15,7 +15,7 @@ public class CollectionExample1 {
         names.add("Karo");
         names.add("Mko");
 
-        checkIsin(names);
+        checkNameInList(names);
         deleteName(names);
         try {
             addByIndex(names);
@@ -26,8 +26,8 @@ public class CollectionExample1 {
 
     }
 
-    private static void checkIsin(List<String> names) {
-        System.out.println("Please input name dor check.");
+    private static void checkNameInList(List<String> names) {
+        System.out.println("Please input name for check.");
         String name = scanner.nextLine();
         if (names.contains(name)) {
             System.out.println(name + " is in list!");
