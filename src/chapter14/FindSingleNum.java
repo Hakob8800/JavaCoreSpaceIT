@@ -1,12 +1,15 @@
 package chapter14;
 
+import java.util.Arrays;
+
 public class FindSingleNum {
 
     public static void main(String[] args) {
 
-        int[] arr = new int[]{2, 3, 5, 2, 5};
+        int[] arr = new int[]{2, 3, 5, 2, 5, 3, 1, 1, 9};
         System.out.println(findSingleNum(arr));
-        System.out.println(meth(arr));
+        System.out.println(xorMeth(arr));
+        System.out.println(sortMeth(arr));
 
 
     }
@@ -30,12 +33,22 @@ public class FindSingleNum {
         return 0;
     }
 
-    static int meth(int[] arr) {
+    static int xorMeth(int[] arr) {
         int res = 0;
         for (int j : arr) {
             res ^= j;
         }
         return res;
+    }
+
+    static int sortMeth(int arr[]) {
+        Arrays.sort(arr);
+        for (int i = 0; i < arr.length - 1; i += 2) {
+            if (arr[i] != arr[i + 1]) {
+                return arr[i];
+            }
+        }
+        return arr[arr.length-1];
     }
 
 }
