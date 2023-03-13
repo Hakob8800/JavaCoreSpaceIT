@@ -1,5 +1,7 @@
 package classWork.people;
 
+import java.util.Collections;
+
 public class Demo {
 
     public static void main(String[] args) {
@@ -18,7 +20,6 @@ public class Demo {
             if(arr[i]!=null){
                 System.out.println(arr[i].toString());
             }
-            else continue;
         }
 
     }
